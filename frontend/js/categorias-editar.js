@@ -1,4 +1,4 @@
-const API = 'http://localhost:3000/api/categorias';
+const API = '/api/categorias';
 const token = sessionStorage.getItem('token');
 if (!token) window.location.href = 'login.html';
 

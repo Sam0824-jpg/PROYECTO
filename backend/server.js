@@ -1,12 +1,16 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config(); // Cargar variables de entorno
 
 const app = express();
 
 // Middlewares importantes para conectar Frontend y Backend
-app.use(cors()); // Habilita peticiones cruzadas (ej. desde el Live Server hacia el localhost:3000)
+app.use(cors()); // Habilita peticiones cruzadas
 app.use(express.json()); // Permite procesar los JSON enviados por los fetch() del frontend
+
+// --- Servir archivos estáticos del Frontend ---
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // --- Importación de Rutas ---
 const authRoutes = require('./routes/auth');
@@ -25,6 +29,11 @@ app.use('/api/categorias', categoriasRoutes);
 app.use('/api/servicios', serviciosRoutes);
 app.use('/api/resenas', resenasRoutes);
 app.use('/api/inicio', inicioRoutes);
+
+// Redirección por defecto al Login si se accede a la raíz
+app.get('/', (req, res) => {
+    res.redirect('/login.html');
+});
 
 // Arrancar servidor
 const PORT = process.env.PORT || 3000;
