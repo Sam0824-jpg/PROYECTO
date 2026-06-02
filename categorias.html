@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FyNe - Categorías</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary py-3">
+        <div class="container">
+            <span class="navbar-brand fw-bold">Módulo: Categorías</span>
+            <a href="inicio.html" class="btn btn-outline-light rounded-0">Volver al Inicio</a>
+        </div>
+    </nav>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Gestión de Categorías</h2>
+            <a href="categorias-registrar.html" class="btn btn-primary"> + Registrar Categoría</a>
+        </div>
+        <div class="mb-4">
+            <input type="text" id="buscadorNombre" class="form-control rounded-0 border-dark" placeholder="🔍 Buscar categoría por nombre..." onkeyup="buscarPorNombre()">
+        </div>
+        <div id="alerta"></div>
+        <div class="card p-0">
+            <table class="table table-bordered mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaCategorias"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="./js/categorias.js"></script>
+</body>
+</html>
