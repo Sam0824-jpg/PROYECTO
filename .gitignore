@@ -1,4 +1,2 @@
-.DS_Store
-backend/.git
-backend/node_modules/
-backend/.env
+.env
+node_modules/
