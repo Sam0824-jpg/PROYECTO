@@ -1,0 +1,45 @@
+const API = 'http://localhost:3000/api/auth';
+
+function login() {
+    const email = document.getElementById('inputEmail').value.trim();
+    const password = document.getElementById('inputPassword').value.trim();
+    const btn = document.getElementById('btnLogin');
+
+    if (!email || !password) {
+        mostrarAlerta('Email y password son requeridos.', 'warning');
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Ingresando...';
+
+    fetch(`${API}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.mensaje === 'Credenciales incorrectas' || data.error) {
+            mostrarAlerta(data.mensaje || data.error, 'danger');
+            return;
+        }
+        // Guardar token JWT y nombre en sessionStorage
+        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('nombre', data.nombre);
+        window.location.href = 'inicio.html';
+    })
+    .catch(() => mostrarAlerta('Error al conectar con el servidor.', 'danger'))
+    .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Ingresar';
+    });
+}
+
+function mostrarAlerta(mensaje, tipo) {
+    document.getElementById('alerta').innerHTML = `
+        <div class="alert alert-${tipo} alert-dismissible fade show rounded-0 border-dark">
+            ${mensaje}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>`;
+}
