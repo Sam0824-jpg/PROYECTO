@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* --- Core Design System: Black & White Monochromatic --- */
+:root {
+    --fyne-black: #000000;
+    --fyne-dark-gray: #1a1a1a;
+    --fyne-medium-gray: #6b7280;
+    --fyne-light-gray: #f3f4f6;
+    --fyne-border-gray: #e5e7eb;
+    --fyne-white: #ffffff;
+    --fyne-radius-pill: 9999px;
+    --fyne-radius-card: 24px;
+    --fyne-radius-input: 16px;
+    --fyne-font: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Global Styles */
+body {
+    font-family: var(--fyne-font);
+    background-color: var(--fyne-white);
+    color: var(--fyne-black);
+    font-size: 0.95rem;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+}
+
+/* Custom Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--fyne-black);
+    letter-spacing: -0.02em;
+}
+
+/* Custom Navbar (Monochromatic & Clean) */
+.navbar {
+    background-color: var(--fyne-white) !important;
+    border-bottom: 1px solid var(--fyne-border-gray);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+    color: var(--fyne-black) !important;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.navbar-brand span.subtitle {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--fyne-medium-gray);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--fyne-black) !important;
+    font-size: 0.95rem;
+}
+
+/* Custom Pill Buttons in Navbar */
+.nav-pill-btn {
+    border: 1px solid var(--fyne-border-gray);
+    background-color: var(--fyne-white);
+    color: var(--fyne-black);
+    padding: 8px 18px;
+    border-radius: var(--fyne-radius-pill);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.nav-pill-btn:hover {
+    border-color: var(--fyne-black);
+    background-color: var(--fyne-light-gray);
+}
+
+/* Theme Toggle Button (Circular Sun) */
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--fyne-border-gray);
+    background-color: var(--fyne-white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--fyne-black);
+    background-color: var(--fyne-light-gray);
+}
+
+/* --- Premium Buttons Overrides --- */
+.btn {
+    font-family: var(--fyne-font);
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: var(--fyne-radius-pill);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+}
+
+/* Primary/Dark Button is Solid Black */
+.btn-primary, .btn-dark, .btn-success, .btn-info {
+    background-color: var(--fyne-black) !important;
+    border: 1px solid var(--fyne-black) !important;
+    color: var(--fyne-white) !important;
+}
+
+.btn-primary:hover, .btn-dark:hover, .btn-success:hover, .btn-info:hover,
+.btn-primary:focus, .btn-dark:focus, .btn-success:focus, .btn-info:focus {
+    background-color: var(--fyne-dark-gray) !important;
+    border-color: var(--fyne-dark-gray) !important;
+    transform: translateY(-1px);
+}
+
+.btn-primary:active, .btn-dark:active {
+    transform: translateY(1px);
+}
+
+/* Outline Buttons */
+.btn-outline-primary, .btn-outline-dark, .btn-outline-secondary {
+    border: 1px solid var(--fyne-border-gray) !important;
+    color: var(--fyne-black) !important;
+    background-color: var(--fyne-white) !important;
+}
+
+.btn-outline-primary:hover, .btn-outline-dark:hover, .btn-outline-secondary:hover {
+    background-color: var(--fyne-black) !important;
+    border-color: var(--fyne-black) !important;
+    color: var(--fyne-white) !important;
+    transform: translateY(-1px);
+}
+
+/* Small Buttons */
+.btn-sm {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+}
+
+/* --- Custom Inputs (Clean & Rounded) --- */
+.form-control, .form-select {
+    font-family: var(--fyne-font);
+    border-radius: var(--fyne-radius-input);
+    border: 1px solid var(--fyne-border-gray);
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    color: var(--fyne-black);
+    transition: all 0.2s ease;
+    background-color: var(--fyne-white);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--fyne-black);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: var(--fyne-medium-gray);
+}
+
+/* Large Inputs (e.g. Search Bar) */
+.form-control-lg {
+    border-radius: var(--fyne-radius-pill);
+    padding: 14px 28px;
+    font-size: 1.05rem;
+}
+
+.input-pill {
+    border-radius: var(--fyne-radius-pill) !important;
+}
+
+/* --- Premium Cards (Extremely rounded & light border) --- */
+.card {
+    border: 1px solid var(--fyne-border-gray);
+    border-radius: var(--fyne-radius-card);
+    background-color: var(--fyne-white);
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01) !important;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Clean Cards without hover zoom */
+.card-flat {
+    box-shadow: none !important;
+}
+
+.card-flat:hover {
+    box-shadow: none !important;
+}
+
+/* Card Headers */
+.card-header {
+    background-color: transparent !important;
+    border-bottom: 1px solid var(--fyne-border-gray);
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+/* --- Badges & Pills --- */
+.badge, .fyne-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--fyne-light-gray);
+    color: var(--fyne-black);
+    border: 1px solid var(--fyne-border-gray);
+    border-radius: var(--fyne-radius-pill);
+    padding: 6px 14px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: none;
+}
+
+/* Specialized badge types */
+.badge-blue {
+    background-color: #ebf5ff;
+    color: #1e40af;
+    border-color: #bfdbfe;
+}
+
+.badge-green {
+    background-color: #f0fdf4;
+    color: #15803d;
+    border-color: #bbf7d0;
+}
+
+.badge-dark {
+    background-color: var(--fyne-black);
+    color: var(--fyne-white);
+    border-color: var(--fyne-black);
+}
+
+/* --- Beautiful Tables --- */
+.table-responsive {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--fyne-border-gray);
+}
+
+.table {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+.table th {
+    background-color: var(--fyne-black) !important;
+    color: var(--fyne-white) !important;
+    font-weight: 600;
+    padding: 16px 20px;
+    border: none;
+}
+
+.table td {
+    padding: 16px 20px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--fyne-border-gray);
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Accordion and expandable rows styling */
+.category-row-card {
+    border: 1px solid var(--fyne-border-gray);
+    border-radius: 16px;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--fyne-white);
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.category-row-card:hover {
+    border-color: var(--fyne-black);
+    background-color: var(--fyne-light-gray);
+}
+
+.category-chevron {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--fyne-light-gray);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--fyne-black);
+}
+
+/* Profile specific styles */
+.profile-avatar-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--fyne-black);
+    color: var(--fyne-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Service tag items in profile */
+.service-destacado-tag {
+    background-color: var(--fyne-white);
+    border: 1px solid var(--fyne-border-gray);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.service-destacado-tag button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--fyne-medium-gray);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.service-destacado-tag button:hover {
+    color: var(--fyne-black);
+}
+
+/* --- Clean alignment utility helper --- */
+.rounded-20 {
+    border-radius: 20px !important;
+}
+
+.rounded-card {
+    border-radius: var(--fyne-radius-card) !important;
+}
+
+.rounded-pill-custom {
+    border-radius: var(--fyne-radius-pill) !important;
+}

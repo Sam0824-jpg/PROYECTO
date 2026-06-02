@@ -1,70 +1,62 @@
-const API = 'http://localhost:3000/api';
-const token = sessionStorage.getItem('token');
-const nombre = sessionStorage.getItem('nombre');
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Validar que exista una sesión activa
+    const token = sessionStorage.getItem('token');
+    const nombre = sessionStorage.getItem('nombre');
 
-if (!token) {
-    window.location.href = 'login.html';
-}
+    if (!token) {
+        window.location.href = 'login.html';
+        return;
+    }
 
-document.getElementById('nombreUsuario').textContent = nombre || '';
-document.getElementById('perfilNombre').textContent = nombre || 'Usuario';
+    // 2. Poblar los datos de la interfaz
+    document.getElementById('nombreUsuario').textContent = nombre || 'Mi Perfil';
+    document.getElementById('perfilNombre').textContent = nombre || 'Usuario';
+    document.getElementById('tituloBienvenida').textContent = `¡Bienvenido, ${nombre || 'Usuario'}!`;
 
-function cargarInicio() {
-    fetch(`${API}/inicio`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-    })
-    .then(res => {
-        if (res.status === 401) {
-            sessionStorage.clear();
-            window.location.href = 'login.html';
-            return;
-        }
-        return res.json();
-    })
-    .then(data => {
-        if (!data) return;
-        
+    // Decodificar el correo electrónico desde el JWT
+    let email = 'correo@ejemplo.com';
+    try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        if (payload.email) email = payload.email;
+    } catch (e) {
+        console.error("Error al decodificar JWT:", e);
+    }
+    document.getElementById('perfilEmail').textContent = email;
+
+    // 3. Mostrar la fecha actual
+    const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('fechaHora').textContent = new Date().toLocaleDateString('es-ES', opcionesFecha);
+
+    // 4. Renderizar las tarjetas de los módulos disponibles
+    cargarModulos();
+
+    // 5. Quitar spinner y mostrar contenido
+    setTimeout(() => {
         document.getElementById('spinner').classList.add('d-none');
         document.getElementById('contenido').classList.remove('d-none');
-        
-        document.getElementById('tituloBienvenida').textContent = data.sistema || 'Panel de Administración';
-        document.getElementById('fechaHora').textContent = new Date(data.fecha_servidor || data.fecha).toLocaleDateString('es-MX', {
-            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-        });
+    }, 400); // Simulando carga
+});
 
-        const contenedor = document.getElementById('tarjetasModulos');
-        contenedor.innerHTML = '';
+function cargarModulos() {
+    const modulos = [
+        { nombre: 'Categorías', desc: 'Añade y gestiona los oficios del catálogo general.', link: 'categorias.html' },
+        { nombre: 'Prestadores', desc: 'Directorio de trabajadores, contactos y zonas de cobertura.', link: 'prestadores.html' }
+    ];
 
-        // Renderizar Módulos Activos
-        if(data.modulos_activos) {
-            data.modulos_activos.forEach(modulo => {
-                // Formatear la URL quitando tildes y a minúsculas
-                const urlModulo = modulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ".html";
-                contenedor.innerHTML += `
-                    <div class="col-md-4">
-                        <div class="card h-100 p-3 text-center">
-                            <h5 class="fw-bold text-capitalize">${modulo}</h5>
-                            <a href="${urlModulo}" class="btn btn-dark btn-sm mt-2">Ir al módulo</a>
-                        </div>
-                    </div>`;
-            });
-        }
-    })
-    .catch(() => {
-        document.getElementById('spinner').classList.add('d-none');
-        mostrarAlerta('Error al cargar. Verifica el servidor.', 'danger');
-    });
+    const contenedor = document.getElementById('tarjetasModulos');
+    contenedor.innerHTML = modulos.map(m => `
+        <div class="col-md-6">
+            <div class="card p-4 h-100 border border-light-gray rounded-card bg-white shadow-sm">
+                <h5 class="fw-bold text-dark mb-2">${m.nombre}</h5>
+                <p class="text-muted mb-4 fs-7">${m.desc}</p>
+                <a href="${m.link}" class="btn btn-primary rounded-pill-custom mt-auto w-100 text-center">Ir al módulo &rarr;</a>
+            </div>
+        </div>
+    `).join('');
 }
 
 function cerrarSesion() {
-    if (!confirm('¿Seguro que deseas cerrar sesión?')) return;
-    sessionStorage.clear();
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('nombre');
     window.location.href = 'login.html';
 }
-
-function mostrarAlerta(mensaje, tipo) {
-    document.getElementById('alerta').innerHTML = `
-        <div class="alert alert-${tipo} rounded-0 border-dark">${mensaje}</div>`;
-}
-
-cargarInicio();
