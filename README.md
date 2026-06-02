@@ -18,6 +18,6 @@ El proyecto cuenta con un sistema de Autenticación JWT y 5 módulos CRUD comple
 ## ⚙️ Instrucciones de Instalación y Ejecución
 
 1. Clonar el repositorio.
-   git clone [https://github.com/Sam0824-jpg/backend.git](https://github.com/Sam0824-jpg/backend.git)
+   git clone [https://github.com/Sam0824-jpg/PROYECTO.git](https://github.com/Sam0824-jpg/PROYECTO.git)
 2. Instalar las dependencias ejecutando:
    npm install 
